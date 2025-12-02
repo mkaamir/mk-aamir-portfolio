@@ -1,35 +1,14 @@
 import { Calendar, User, ArrowRight } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
+import { blogsData } from '../data/blogsData';
 
 export default function Blog() {
-  const blogs = [
-    {
-      title: "Getting Started with React Hooks",
-      author: "MK Aamir Lehri",
-      date: "Dec 15, 2025",
-      category: "React",
-      excerpt:
-        "Learn how to use React Hooks to write cleaner and more efficient functional components.",
-      image: "/images/project5.jpg",
-    },
-    {
-      title: "Web Performance Optimization Tips",
-      author: "MK Aamir Lehri",
-      date: "Dec 10, 2025",
-      category: "Performance",
-      excerpt:
-        "Discover techniques to optimize your website's performance and improve user experience.",
-      image: "/images/project3.jpg",
-    },
-    {
-      title: "Building Scalable Node.js Applications",
-      author: "MK Aamir Lehri",
-      date: "Dec 5, 2025",
-      category: "Backend",
-      excerpt:
-        "Best practices for building scalable and maintainable Node.js applications.",
-      image: "/images/project6.jpg",
-    },
-  ];
+  const navigate = useNavigate();
+
+  const handleBlogClick = (id) => {
+    navigate(`/blog/${id}`);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <section id="blog" className="py-20 px-4 bg-slate-900">
@@ -43,10 +22,11 @@ export default function Blog() {
         </p>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {blogs.map((blog, index) => (
+          {blogsData.map((blog) => (
             <article
-              key={index}
-              className="group bg-slate-800 rounded-lg overflow-hidden border border-yellow-400 border-opacity-20 hover:border-opacity-100 hover:bg-slate-750 transition duration-300"
+              key={blog.id}
+              onClick={() => handleBlogClick(blog.id)}
+              className="group bg-slate-800 rounded-lg overflow-hidden border border-yellow-400 border-opacity-20 hover:border-opacity-100 hover:bg-slate-750 transition duration-300 cursor-pointer"
             >
               {/* Image */}
               <div className="h-48 bg-gradient-to-br from-yellow-400 to-yellow-600 opacity-20 flex items-center justify-center overflow-hidden group-hover:opacity-40 transition">

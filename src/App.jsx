@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
-import Footer from './components/Footer'; 
+import BlogDetail from './pages/blogDetail';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />  {/* Add this route */}
         </Routes>
-        <Footer /> 
+        <Footer />
       </div>
     </Router>
   );
