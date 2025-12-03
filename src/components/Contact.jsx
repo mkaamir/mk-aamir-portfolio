@@ -1,13 +1,26 @@
-import { Mail, Phone, MapPin, Linkedin, Github, Facebook, Twitter, Instagram } from 'lucide-react';
-import { useState } from 'react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Github,
+  Facebook,
+  Twitter,
+  Instagram,
+  Send,
+} from "lucide-react";
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,29 +30,95 @@ export default function Contact() {
   };
 
   const handleSubmit = () => {
-    if (formData.name && formData.email && formData.subject && formData.message) {
-      console.log('Form submitted:', formData);
-      alert('Thank you for your message! I will get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } else {
-      alert('Please fill in all fields');
+    // Validate form
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
+      alert("Please fill in all fields");
+      return;
     }
+
+    setIsLoading(true);
+
+    // EmailJS parameters - matching your template variables
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+    };
+
+    // Send email using EmailJS
+    emailjs
+      .send(
+        "service_16yirr5", // Your Service ID
+        "template_9rln0ug", // Your Template ID
+        templateParams,
+        "5i52-IRAAupNdyE-D" // Your Public Key
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          alert("✅ Thank you for your message! I will get back to you soon.");
+          // Reset form
+          setFormData({ name: "", email: "", subject: "", message: "" });
+          setIsLoading(false);
+        },
+        (error) => {
+          console.error("FAILED...", error);
+          alert(
+            "❌ Failed to send message. Please try again or email me directly at mkaamir786@gmail.com"
+          );
+          setIsLoading(false);
+        }
+      );
   };
 
   const socialLinks = [
-    { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/in/mkaamir786', color: '#0A66C2' },
-    { name: 'GitHub', icon: Github, url: 'https://github.com/mkaamir', color: '#333333' },
-    { name: 'Instagram', icon: Instagram, url: 'https://stackoverflow.com', color: '#F48024' },
-    { name: 'Facebook', icon: Facebook, url: 'https://facebook.com', color: '#1877F2' },
-    { name: 'Twitter', icon: Twitter, url: 'https://twitter.com', color: '#1DA1F2' },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      url: "https://linkedin.com/in/mkaamir786",
+      color: "#0A66C2",
+    },
+    {
+      name: "GitHub",
+      icon: Github,
+      url: "https://github.com/mkaamir",
+      color: "#333333",
+    },
+    {
+      name: "Instagram",
+      icon: Instagram,
+      url: "https://stackoverflow.com",
+      color: "#F48024",
+    },
+    {
+      name: "Facebook",
+      icon: Facebook,
+      url: "https://facebook.com",
+      color: "#1877F2",
+    },
+    {
+      name: "Twitter",
+      icon: Twitter,
+      url: "https://twitter.com",
+      color: "#1DA1F2",
+    },
   ];
 
   return (
     <section id="contact" className="py-20 px-4 bg-slate-950">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-white mb-4">Contact Me</h2>
+        <h2 className="text-4xl font-bold text-center text-white mb-4">
+          Contact Me
+        </h2>
         <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-          Have a project in mind or want to collaborate? Feel free to reach out to me
+          Have a project in mind or want to collaborate? Feel free to reach out
+          to me
         </p>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -56,7 +135,9 @@ export default function Contact() {
                 <div>
                   <h4 className="text-white font-semibold mb-1">Email</h4>
                   <p className="text-gray-400">mkaamir786@gmail.com</p>
-                  <p className="text-gray-500 text-sm">I'll reply within 24 hours</p>
+                  <p className="text-gray-500 text-sm">
+                    I'll reply within 24 hours
+                  </p>
                 </div>
               </div>
 
@@ -80,7 +161,9 @@ export default function Contact() {
                 <div>
                   <h4 className="text-white font-semibold mb-1">Location</h4>
                   <p className="text-gray-400">Quetta Balochistan, Pakistan</p>
-                  <p className="text-gray-500 text-sm">Based in Pakistan, available worldwide</p>
+                  <p className="text-gray-500 text-sm">
+                    Based in Pakistan, available worldwide
+                  </p>
                 </div>
               </div>
             </div>
@@ -112,7 +195,9 @@ export default function Contact() {
           <div>
             <div className="bg-slate-900 p-8 rounded-lg border border-yellow-400 border-opacity-20">
               <div className="mb-6">
-                <label className="block text-white font-semibold mb-2">Your Name</label>
+                <label className="block text-white font-semibold mb-2">
+                  Your Name
+                </label>
                 <input
                   type="text"
                   name="name"
@@ -124,7 +209,9 @@ export default function Contact() {
               </div>
 
               <div className="mb-6">
-                <label className="block text-white font-semibold mb-2">Your Email</label>
+                <label className="block text-white font-semibold mb-2">
+                  Your Email
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -136,7 +223,9 @@ export default function Contact() {
               </div>
 
               <div className="mb-6">
-                <label className="block text-white font-semibold mb-2">Subject</label>
+                <label className="block text-white font-semibold mb-2">
+                  Subject
+                </label>
                 <input
                   type="text"
                   name="subject"
@@ -148,7 +237,9 @@ export default function Contact() {
               </div>
 
               <div className="mb-8">
-                <label className="block text-white font-semibold mb-2">Message</label>
+                <label className="block text-white font-semibold mb-2">
+                  Message
+                </label>
                 <textarea
                   name="message"
                   value={formData.message}
@@ -161,9 +252,20 @@ export default function Contact() {
 
               <button
                 onClick={handleSubmit}
-                className="w-full px-8 py-3 bg-yellow-400 !text-slate-950 font-semibold rounded hover:bg-yellow-500 transition duration-300"
+                disabled={isLoading}
+                className="w-full px-8 py-3 bg-yellow-400 !text-slate-950 font-semibold rounded hover:bg-yellow-500 transition duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isLoading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-slate-950"></div>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send size={20} />
+                    Send Message
+                  </>
+                )}
               </button>
             </div>
           </div>

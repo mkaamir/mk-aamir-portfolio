@@ -56,7 +56,7 @@ export default function Footer() {
               <span className="text-yellow-400">MK AaMir</span>
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Building beautiful, functional digital experiences with modern technologies.
+            Helping businesses grow with smart, sleek, and reliable web development.
             </p>
           </div>
 

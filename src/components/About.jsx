@@ -1,6 +1,16 @@
-import { Mail, Phone, MapPin, Calendar } from "lucide-react";
+import { Mail, Phone, MapPin, Calendar, Download } from "lucide-react";
 
 export default function About() {
+  const handleDownloadCV = () => {
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = '/aamir_cv.pdf';
+    link.download = 'MK_Aamir_Lehri_CV.pdf'; // Name for the downloaded file
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section id="about" className="py-20 px-4 bg-slate-900">
       <div className="max-w-7xl mx-auto">
@@ -81,7 +91,11 @@ export default function About() {
               </div>
             </div>
 
-            <button className="mt-8 px-8 py-3 bg-yellow-400 text-slate-950 font-semibold rounded hover:bg-yellow-500 transition duration-300">
+            <button 
+              onClick={handleDownloadCV}
+              className="mt-8 px-8 py-3 bg-yellow-400 text-slate-950 font-semibold rounded hover:bg-yellow-500 transition duration-300 flex items-center gap-2"
+            >
+              <Download size={20} />
               Download Resume
             </button>
           </div>

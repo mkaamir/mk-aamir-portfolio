@@ -1,4 +1,4 @@
-import { ChevronDown, Briefcase } from 'lucide-react';
+import { ChevronDown, Briefcase, Download } from 'lucide-react';
 
 export default function Hero() {
   const scrollToProjects = () => {
@@ -6,6 +6,16 @@ export default function Hero() {
     if (projectsSection) {
       projectsSection.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleDownloadCV = () => {
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = '/aamir_cv.pdf';
+    link.download = 'MK_Aamir_Lehri_CV.pdf'; // Name for the downloaded file
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -37,7 +47,11 @@ export default function Hero() {
                 <Briefcase size={20} />
                 View My Work
               </button>
-              <button className="px-8 py-3 border-2 border-yellow-400 text-yellow-400 font-semibold rounded hover:bg-yellow-400 hover:text-slate-950 transition duration-300">
+              <button 
+                onClick={handleDownloadCV}
+                className="px-8 py-3 border-2 border-yellow-400 text-yellow-400 font-semibold rounded hover:bg-yellow-400 hover:text-slate-950 transition duration-300 flex items-center justify-center gap-2"
+              >
+                <Download size={20} />
                 Download CV
               </button>
             </div>
