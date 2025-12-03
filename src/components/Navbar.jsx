@@ -13,7 +13,7 @@ export default function Navbar() {
     const sectionId = item.toLowerCase();
     
     // If on project detail page, navigate to home first
-    if (location.pathname.startsWith('/project/')) {
+    if (location.pathname.startsWith('/project/') || location.pathname.startsWith('/blog/')) {
       navigate('/');
       // Wait for navigation, then scroll
       setTimeout(() => {

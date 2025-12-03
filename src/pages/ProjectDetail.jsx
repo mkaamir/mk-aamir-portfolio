@@ -62,14 +62,14 @@ export default function ProjectDetail() {
 
           {/* Action Buttons */}
           <div className="flex gap-4">
-            <button 
+            <button disabled
               onClick={() => window.open(project.liveUrl, '_blank')}
               className="flex items-center gap-2 px-6 py-3 bg-yellow-400 text-slate-950 font-semibold rounded hover:bg-yellow-500 transition"
             >
               <ExternalLink size={20} />
-              View Live Demo
+              Live Demo Coming Soon
             </button>
-            <button 
+            <button disabled
               onClick={() => window.open(project.githubUrl, '_blank')}
               className="flex items-center gap-2 px-6 py-3 border-2 border-yellow-400 text-yellow-400 font-semibold rounded hover:bg-yellow-400 hover:text-slate-950 transition"
             >

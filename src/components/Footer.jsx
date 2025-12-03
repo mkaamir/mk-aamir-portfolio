@@ -11,23 +11,31 @@ export default function Footer() {
 
   const handleQuickLinkClick = (link) => {
     const sectionId = link.toLowerCase();
-    const isHomePage = location.pathname === '/';
-
-    if (isHomePage) {
+    
+    // Check if on home page
+    if (location.pathname === '/') {
       // Already on home page, just scroll to section
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
+      if (sectionId === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     } else {
-      // On different page (like project detail), navigate to home first
+      // On project/blog detail page, navigate to home first
       navigate('/');
       
       // Wait for navigation to complete, then scroll
       setTimeout(() => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
+        if (sectionId === 'home') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+          }
         }
       }, 100);
     }
