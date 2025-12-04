@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
   const testimonials = [
     {
       name: "John Anderson",
@@ -78,26 +81,6 @@ export default function Testimonials() {
     }
   ];
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const maxIndex = isMobile ? testimonials.length - 1 : Math.max(0, testimonials.length - 3);
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
-  };
-
   return (
     <section id='testimonials' className="py-20 px-4 bg-slate-950">
       <div className="max-w-7xl mx-auto">
@@ -108,102 +91,122 @@ export default function Testimonials() {
           Don't just take my word for it - hear what my clients have to say about their experience
         </p>
 
-        <div className="relative">
-          <div className="overflow-hidden">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ 
-                transform: isMobile 
-                  ? `translateX(-${currentIndex * 100}%)`
-                  : `translateX(-${currentIndex * 33.333}%)`,
-                gap: '2rem'
-              }}
-            >
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 bg-slate-900 rounded-lg p-6 border-2 border-yellow-400 border-opacity-30 hover:border-opacity-100 transition duration-300"
-                  style={{
-                    width: isMobile ? '100%' : 'calc(33.333% - 1.33rem)',
-                    marginRight: isMobile ? '0' : '2rem'
-                  }}
-                >
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-full border-2 border-yellow-400 overflow-hidden flex-shrink-0">
-                      <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name}
-                        className="w-full h-full object-cover"
-                      />
+        <div className="relative testimonials-swiper">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={30}
+            slidesPerView={1}
+            slidesPerGroup={1}
+            loop={true}
+            centeredSlides={true}
+            initialSlide={1}
+            navigation={{
+              nextEl: '.swiper-button-next-custom',
+              prevEl: '.swiper-button-prev-custom',
+            }}
+            pagination={{
+              el: '.swiper-pagination-custom',
+              clickable: true,
+            }}
+            breakpoints={{
+              768: {
+                slidesPerView: 3,
+                slidesPerGroup: 1,
+                centeredSlides: true,
+              },
+            }}
+            className="pb-16"
+          >
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={index}>
+                {({ isActive }) => (
+                  <div
+                    className={`bg-slate-900 rounded-lg p-6 border-2 transition-all duration-300 h-full ${
+                      isActive
+                        ? 'border-yellow-400 border-opacity-100 shadow-lg shadow-yellow-400/20'
+                        : 'border-yellow-400 border-opacity-30'
+                    }`}
+                  >
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-16 h-16 rounded-full border-2 border-yellow-400 overflow-hidden flex-shrink-0">
+                        <img 
+                          src={testimonial.image} 
+                          alt={testimonial.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-white font-bold text-lg">
+                          {testimonial.name}
+                        </h3>
+                        <p className="text-yellow-400 text-sm">
+                          {testimonial.country}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-white font-bold text-lg">
-                        {testimonial.name}
-                      </h3>
-                      <p className="text-yellow-400 text-sm">
-                        {testimonial.country}
-                      </p>
+
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          size={20} 
+                          className="text-yellow-400 fill-yellow-400"
+                        />
+                      ))}
                     </div>
+
+                    <p className="text-gray-400 leading-relaxed">
+                      "{testimonial.feedback}"
+                    </p>
                   </div>
-
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        size={20} 
-                        className="text-yellow-400 fill-yellow-400"
-                      />
-                    ))}
-                  </div>
-
-                  <p className="text-gray-400 leading-relaxed">
-                    "{testimonial.feedback}"
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-4 mt-12">
-            <button
-              onClick={handlePrev}
-              disabled={currentIndex === 0}
-              className={`w-12 h-12 rounded-full flex items-center justify-center transition ${
-                currentIndex === 0
-                  ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
-                  : 'bg-yellow-400 text-slate-950 hover:bg-yellow-500'
-              }`}
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={handleNext}
-              disabled={currentIndex >= maxIndex}
-              className={`w-12 h-12 rounded-full flex items-center justify-center transition ${
-                currentIndex >= maxIndex
-                  ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
-                  : 'bg-yellow-400 text-slate-950 hover:bg-yellow-500'
-              }`}
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
-
-          <div className="flex justify-center gap-2 mt-6">
-            {[...Array(maxIndex + 1)].map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-3 rounded-full transition ${
-                  currentIndex === index
-                    ? 'bg-yellow-400 w-8'
-                    : 'bg-gray-600 hover:bg-gray-500 w-3'
-                }`}
-              />
+                )}
+              </SwiperSlide>
             ))}
+          </Swiper>
+
+          {/* Custom Navigation Buttons */}
+          <div className="flex justify-center gap-4 mt-2">
+            <button
+              className="swiper-button-prev-custom w-12 h-12 rounded-full bg-yellow-400 text-slate-950 hover:bg-yellow-500 flex items-center justify-center transition cursor-pointer"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button
+              className="swiper-button-next-custom w-12 h-12 rounded-full bg-yellow-400 text-slate-950 hover:bg-yellow-500 flex items-center justify-center transition cursor-pointer"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
           </div>
+
+          {/* Custom Pagination */}
+          <div className="swiper-pagination-custom flex justify-center gap-2 mt-6"></div>
         </div>
       </div>
+
+      <style jsx>{`
+        .testimonials-swiper .swiper-pagination-custom .swiper-pagination-bullet {
+          width: 12px;
+          height: 12px;
+          background: #4b5563;
+          opacity: 1;
+          border-radius: 50%;
+          transition: all 0.3s;
+        }
+
+        .testimonials-swiper .swiper-pagination-custom .swiper-pagination-bullet-active {
+          width: 32px;
+          background: #facc15;
+          border-radius: 6px;
+        }
+
+        .testimonials-swiper .swiper-slide {
+          height: auto;
+        }
+      `}</style>
     </section>
   );
 }
