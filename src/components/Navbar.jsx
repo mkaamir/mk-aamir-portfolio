@@ -7,12 +7,12 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const menuItems = ['Home', 'About', 'Services', 'Skills', 'Projects', 'Blog', 'Contact'];
+  const menuItems = ['Home', 'About', 'Services', 'Skills', 'Projects', 'Testimonials', 'Blog', 'Contact'];
 
   const handleNavigation = (item) => {
     const sectionId = item.toLowerCase();
     
-    // If on project detail page, navigate to home first
+    // If on project/blog detail page, navigate to home first
     if (location.pathname.startsWith('/project/') || location.pathname.startsWith('/blog/')) {
       navigate('/');
       // Wait for navigation, then scroll
