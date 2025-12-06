@@ -60,8 +60,7 @@ export default function Testimonials() {
     {
       name: "drdavegerhart",
       country: "United States",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+      image:null,
       rating: 5,
       feedback:
         "It was a pleasure working with mkamir. He designed a beautiful website in the time required. I was able to make revisions and the turnaround time was really quick. I would recommend him for similar project and I will use him again. Thank you",
@@ -69,12 +68,21 @@ export default function Testimonials() {
     {
       name: "tameekaleon",
       country: "United States",
-      image:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop",
+      image:null,
       rating: 5,
       feedback:
         "Working with MK Aamir was a fantastic experience. They delivered a stunning website that perfectly captured our brand vision. Communication was excellent throughout.",
     },
+
+    {
+      name: "Jaklacz",
+      country: "Czech Republic",
+      image: null,
+      rating: 5,
+      feedback:
+        "Professional, creative, and reliable. MK Aamir delivered beyond our expectations. The attention to detail and commitment to quality is remarkable.",
+    },
+
     {
       name: "chrissy73184",
       country: "United Kingdom",
@@ -91,14 +99,7 @@ export default function Testimonials() {
       feedback:
         "It was a pleasure working with Mk Aamir. The service was prompt, and the delivery exceeded my expectations. He was extremely patient, courteous, and took the time to answer all of my questions thoroughly. I look forward to working with him again in the future.",
     },
-    {
-      name: "Jaklacz",
-      country: "Czech Republic",
-      image: null,
-      rating: 5,
-      feedback:
-        "Professional, creative, and reliable. MK Aamir delivered beyond our expectations. The attention to detail and commitment to quality is remarkable.",
-    },
+
     {
       name: "reginemutonji",
       country: "Australia",
@@ -107,6 +108,16 @@ export default function Testimonials() {
       feedback:
         "Very helpful, all went well. replied quickly , happy to make changes. A pleasant experience.",
     },
+
+    {
+      name: "goodwoodz",
+      country: "United States",
+      image: null,
+      rating: 5,
+      feedback:
+        "Aamir did a great job, willing to help with edits and changes. Very fast and punctual. I have future project that I will use him exclusively for, as he showed great character and kindness throughout the process. Best of luck bud! You made another happy Customer!",
+    },
+    
     {
       name: "dmayaguy",
       country: "Ireland",
@@ -123,15 +134,7 @@ export default function Testimonials() {
       feedback:
         "Working with MK Aamir has been amazing! They're not just a developer, but a true partner who cares about your success. The results speak for themselves.",
     },
-    {
-      name: "goodwoodz",
-      country: "United States",
-      image: null,
-      rating: 5,
-      feedback:
-        "Aamir did a great job, willing to help with edits and changes. Very fast and punctual. I have future project that I will use him exclusively for, as he showed great character and kindness throughout the process. Best of luck bud! You made another happy Customer!",
-    },
-
+    
     {
       name: "badgerpropertie",
       country: "United States",
