@@ -93,19 +93,19 @@ export default function Contact() {
     {
       name: "Instagram",
       icon: Instagram,
-      url: "https://stackoverflow.com",
+      url: "",
       color: "#F48024",
     },
     {
       name: "Facebook",
       icon: Facebook,
-      url: "https://facebook.com",
+      url: "",
       color: "#1877F2",
     },
     {
       name: "Twitter",
       icon: Twitter,
-      url: "https://twitter.com",
+      url: "",
       color: "#1DA1F2",
     },
   ];
