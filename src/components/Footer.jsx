@@ -1,40 +1,40 @@
-import { Github, Linkedin, Twitter, Mail, ArrowUp } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Github, Linkedin, Twitter, Mail, ArrowUp } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleQuickLinkClick = (link) => {
     const sectionId = link.toLowerCase();
-    
+
     // Check if on home page
-    if (location.pathname === '/') {
+    if (location.pathname === "/") {
       // Already on home page, just scroll to section
-      if (sectionId === 'home') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (sectionId === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         const section = document.getElementById(sectionId);
         if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
+          section.scrollIntoView({ behavior: "smooth" });
         }
       }
     } else {
       // On project/blog detail page, navigate to home first
-      navigate('/');
-      
+      navigate("/");
+
       // Wait for navigation to complete, then scroll
       setTimeout(() => {
-        if (sectionId === 'home') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (sectionId === "home") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
           const section = document.getElementById(sectionId);
           if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
+            section.scrollIntoView({ behavior: "smooth" });
           }
         }
       }, 100);
@@ -43,8 +43,13 @@ export default function Footer() {
 
   const currentYear = new Date().getFullYear();
 
-  const quickLinks = ['Home', 'About', 'Services', 'Projects'];
-  const services = ['Front-End Development', 'Full-Stack Web Application', 'Backend Development', 'WordPress Website'];
+  const quickLinks = ["Home", "About", "Services", "Projects"];
+  const services = [
+    "Front-End Development",
+    "Full-Stack Web Application",
+    "Backend Development",
+    "WordPress Website",
+  ];
 
   return (
     <footer className="bg-slate-950 border-t border-yellow-400 border-opacity-20 text-center md:text-left">
@@ -56,7 +61,8 @@ export default function Footer() {
               <span className="text-yellow-400">MK AaMir</span>
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-            Helping businesses grow with smart, sleek, and reliable web development.
+              Helping businesses grow with smart, sleek, and reliable web
+              development.
             </p>
           </div>
 
@@ -83,7 +89,10 @@ export default function Footer() {
             <ul className="space-y-2">
               {services.map((service, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-400 hover:text-yellow-400 transition text-sm">
+                  <a
+                    href="#"
+                    className="text-gray-400 hover:text-yellow-400 transition text-sm"
+                  >
                     {service}
                   </a>
                 </li>
@@ -134,7 +143,7 @@ export default function Footer() {
                 <Twitter size={18} />
               </a>
               <a
-                href="mailto:"
+                href="#"
                 className="w-10 h-10 rounded-lg bg-yellow-400 bg-opacity-10 hover:bg-opacity-20 border border-yellow-400 border-opacity-30 text-yellow-400 hover:text-yellow-500 transition flex items-center justify-center"
               >
                 <Mail size={18} />
