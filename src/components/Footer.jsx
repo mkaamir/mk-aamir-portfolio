@@ -116,13 +116,13 @@ export default function Footer() {
             {/* Social Links */}
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://github.com/mkaamir"
                 className="w-10 h-10 rounded-lg bg-yellow-400 bg-opacity-10 hover:bg-opacity-20 border border-yellow-400 border-opacity-30 text-yellow-400 hover:text-yellow-500 transition flex items-center justify-center"
               >
                 <Github size={18} />
               </a>
               <a
-                href="#"
+                href="https://linkedin.com/in/mkaamir786"
                 className="w-10 h-10 rounded-lg bg-yellow-400 bg-opacity-10 hover:bg-opacity-20 border border-yellow-400 border-opacity-30 text-yellow-400 hover:text-yellow-500 transition flex items-center justify-center"
               >
                 <Linkedin size={18} />
@@ -134,7 +134,7 @@ export default function Footer() {
                 <Twitter size={18} />
               </a>
               <a
-                href="#"
+                href="mailto:"
                 className="w-10 h-10 rounded-lg bg-yellow-400 bg-opacity-10 hover:bg-opacity-20 border border-yellow-400 border-opacity-30 text-yellow-400 hover:text-yellow-500 transition flex items-center justify-center"
               >
                 <Mail size={18} />
